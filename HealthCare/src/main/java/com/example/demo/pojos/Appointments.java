@@ -9,4 +9,6 @@ public class Appointments {
 	
 	private String type;
 	
+	private String speciality;
+	
 }
