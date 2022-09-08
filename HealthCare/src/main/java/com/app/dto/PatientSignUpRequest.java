@@ -32,6 +32,8 @@ public class PatientSignUpRequest {
 	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})", message = "Blank or Invalid password")
 	private String password;
 	
+	//confirm password
+	
 	@NotBlank(message = "mobile no is required")
 	private long phone_no;
 	
