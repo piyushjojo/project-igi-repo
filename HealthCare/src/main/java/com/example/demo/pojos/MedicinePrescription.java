@@ -10,8 +10,14 @@ import javax.persistence.Table;
 public class MedicinePrescription extends BaseEntity{
 	
 	@ManyToOne
+	@JoinColumn(name = "appointment_id" , nullable = false )
+	private Appointments appointment ;
+	
+	
+	@ManyToOne
 	@JoinColumn(name = "med_id" , nullable = false )
 	private Medicine medicine ; 
+	
 	
 	private int quantity ; 
 }
