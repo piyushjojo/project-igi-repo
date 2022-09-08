@@ -1,4 +1,4 @@
-package com.example.demo.pojos;
+package com.app.pojos;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -6,16 +6,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "lab_prescription")
-public class LabPrescription extends BaseEntity {
+@Table(name = "medicine_prescription")
+public class MedicinePrescription extends BaseEntity{
 	
-
 	@ManyToOne
 	@JoinColumn(name = "appointment_id" , nullable = false )
 	private Appointments appointment ;
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "labtest_id" , nullable = false)
-	private LabTests lab_test_id;
+	@JoinColumn(name = "med_id" , nullable = false )
+	private Medicine medicine ; 
+	
+	
+	private int quantity ; 
 }

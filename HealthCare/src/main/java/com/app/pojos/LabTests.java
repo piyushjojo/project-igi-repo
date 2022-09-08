@@ -1,4 +1,4 @@
-package com.example.demo.pojos;
+package com.app.pojos;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
