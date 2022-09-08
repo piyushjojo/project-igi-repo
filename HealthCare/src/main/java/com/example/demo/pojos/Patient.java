@@ -15,6 +15,7 @@ public class Patient {
 	@Id
 	@Column(name = "email")
 	private String pEmail;
+	
 	private String name;
 	private long phone;
 	
@@ -30,6 +31,10 @@ public class Patient {
 	//status
 	
 	private String password;
+	
+	public Patient() {
+		
+	}
 	
 	
 

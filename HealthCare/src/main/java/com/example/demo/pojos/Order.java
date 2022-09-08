@@ -9,13 +9,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ManyToAny;
+
 @Entity
-@Table(name = "order")
+@Table(name = "order_table")
 public class Order extends BaseEntity{
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "pEmail" , nullable = false)
+	@JoinColumn(name = "pEmail" )
 	private Patient patient ; 
 	
 	private double amount ; 
