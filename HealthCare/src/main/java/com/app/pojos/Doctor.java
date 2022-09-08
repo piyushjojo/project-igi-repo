@@ -38,7 +38,9 @@ public class Doctor {
 	
 	private int experience ; //year
 	
-	private boolean is_approved ; 
+	private boolean is_approved ; //status to be approved by admin
+	
+	private String speciality ; 
 	
 	
 }
