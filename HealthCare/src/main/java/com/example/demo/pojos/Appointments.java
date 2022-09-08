@@ -7,4 +7,6 @@ import javax.persistence.Table;
 @Table(name = "appointments")
 public class Appointments {
 	
+	private String type;
+	
 }
