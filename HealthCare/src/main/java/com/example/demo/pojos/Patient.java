@@ -18,7 +18,7 @@ public class Patient {
 	private String name;
 	private long phone;
 	
-	//address
+	private String address ; 
 	
 	private LocalDate dob;
 	
