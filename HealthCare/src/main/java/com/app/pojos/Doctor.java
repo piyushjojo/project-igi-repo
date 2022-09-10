@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Doctor {
 	
 	@Id
-	private String doc_email ; 
+	private String email ; 
 	
 	//dept no 
 	

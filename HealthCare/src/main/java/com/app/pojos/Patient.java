@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Patient {
 	@Id
 	@Column(name = "email")
-	private String pEmail;
+	private String email;
 	
 	private String name;
 	private long phone;

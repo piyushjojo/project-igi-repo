@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserLoginRequest {
+public class PatientLoginRequest {
 	@NotBlank(message = "email is required")
 	private String email;
 	@NotBlank(message = "password is required")
