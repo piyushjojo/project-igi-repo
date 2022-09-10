@@ -23,14 +23,15 @@ public class PatientService implements IPatientService {
 	
 	@Override
 	public PatientLoginResponse login(PatientLoginRequest request) {
-		Patient Patient = patientRepo.findByEmailAndPassword(request.getEmail(), request.getPassword())
+		Patient patient = patientRepo.findByEmailAndPassword(request.getEmail(), request.getPassword())
 				.orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!!!"));
+		System.out.println(patient);
 		// => valid login
 		// Patient : PERSISTENT
 		// API of ModelMapper : public Object map(Object src,Class<T> destType)
 		// Mapping from Entity --> DTO
-		PatientLoginResponse resp = mapper.map(Patient, PatientLoginResponse.class);
-		
+		PatientLoginResponse resp = mapper.map(patient, PatientLoginResponse.class);
+		System.out.println(resp);
 		return resp;
 	}
 

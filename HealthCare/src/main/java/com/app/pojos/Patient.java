@@ -9,8 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.ToString;
+
 @Entity
 @Table(name = "patient_profile")
+@ToString
 public class Patient {
 	@Id
 	@Column(name = "email")
