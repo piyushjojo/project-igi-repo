@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import {
   Button,
@@ -72,16 +71,16 @@ function PatientLogin() {
               />
             </FormGroup>
             <div class="text-center">
-            <Button 
-              disabled={email && password ? false : true}
-              title="Button"
-              onPress={() => {
-                console.log("sdasds");
-              }}
-              onClick={handleClick}
-            >
-              Submit
-            </Button>
+              <Button
+                disabled={email && password ? false : true}
+                title="Button"
+                onPress={() => {
+                  console.log("sdasds");
+                }}
+                onClick={handleClick}
+              >
+                Submit
+              </Button>
             </div>
           </Form>
         </div>
