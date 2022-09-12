@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../assets/trucklogo.png";
+// import Logo from "../assets/trucklogo.png";
 import { Link } from "react-router-dom";
 
 import "../styles/Navbar.css";
@@ -13,7 +13,7 @@ function Navbar() {
   return (
     <div className="navbar">
       <div className="leftSide" id={openLinks ? "open" : "close"}>
-        <img src={Logo} />
+        {/* <img src={Logo} /> */}
         <div className="hiddenLinks">
           <Link to="/"> Home </Link>
           <Link to="/about"> About </Link>
@@ -29,9 +29,7 @@ function Navbar() {
         <Link to="/menu"> Services </Link>
         <Link to="/patient/signin"> SignIn </Link>
         <Link to="/register"> Register </Link>
-        <button onClick={toggleNavbar}>
-          Reorder
-        </button>
+        <button onClick={toggleNavbar}>Reorder</button>
       </div>
     </div>
   );
