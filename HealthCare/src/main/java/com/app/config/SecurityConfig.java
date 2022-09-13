@@ -30,7 +30,8 @@ public class SecurityConfig {
 		System.out.println("secutiry configure authorization in security config");
 		http.csrf().disable().authorizeRequests().
 		antMatchers("/patient/signin","/patient/signout","/patient/profile",
-				"/patient/profile/changePassword/{id}","/patient/signup1" , "/patient/signup2").permitAll().
+				"/patient/profile/changePassword/{id}","/patient/signup1" , "/patient/signup2",
+				"/medincharge/signin","/medincharge/profile", "/medincharge/signout" , "/medincharge/addMedicine").permitAll().
 //		antMatchers("/products/purchase").hasRole("CUSTOMER").
 //		antMatchers("/products/add").hasRole("ADMIN").
 		anyRequest().authenticated().

@@ -1,28 +1,26 @@
-package com.app.pojos;
+package com.app.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
-@Table(name = "medicine")
 @Getter
 @Setter
 @ToString
-public class Medicine extends BaseEntity{
-	
+public class MedicineDTO {
+	@NotBlank(message = "can not be blank")
 	private String name ; 
+	
 	private double price ; 
+	
 	private int quantity ; 
+	@NotBlank(message = "can not be blank")
 	private String manufacturer ; 
-
 //	private String description ; 
 //	private String category ; 
 //	private String diseases ; 
 //	private String side_effects ; 
+
 }
