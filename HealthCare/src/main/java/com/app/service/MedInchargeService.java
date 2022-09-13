@@ -11,6 +11,7 @@ import com.app.dao.MedicineRepository;
 import com.app.dto.MedInchargeLoginRequest;
 import com.app.dto.MedInchargeLoginResponse;
 import com.app.dto.MedInchargeProfileDTO;
+import com.app.dto.MedQtyUpdateDTO;
 import com.app.dto.MedicineDTO;
 import com.app.pojos.Medicine;
 import com.app.pojos.MedicineIncharge;
@@ -68,6 +69,17 @@ public class MedInchargeService implements IMedInchargeService {
 		return "medicine added successfully";
 	}
 	
+	@Override
+	public String deleteMedicine(long id) {
+		medRepo.deleteById(null);
+		return "medicine deleted";
+	}
+	
+	@Override
+	public String updateQty(long id, MedQtyUpdateDTO medQtyDTO) {
+		medRepo.udpateMedQty(id, medQtyDTO.getQuantity());
+		return "qty updated successfully";
+	}
 	
 
 }
