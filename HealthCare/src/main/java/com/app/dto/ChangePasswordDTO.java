@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class PatientChangePassword {
+public class ChangePasswordDTO {
 	
 	private String oldPassword ; 
 	private String newPassword ; 

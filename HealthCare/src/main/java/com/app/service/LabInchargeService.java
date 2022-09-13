@@ -6,25 +6,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
-import com.app.dao.MedInchargeRepository;
-import com.app.dao.MedicineRepository;
+import com.app.dao.LabInchargeRepository;
+import com.app.dao.LabTestRepository;
+import com.app.dto.LabTestsDTO;
 import com.app.dto.LoginRequestDTO;
 import com.app.dto.LoginResponseDTO;
 import com.app.dto.MedQtyUpdateDTO;
-import com.app.dto.MedicineDTO;
 import com.app.dto.ProfileDTO;
-import com.app.pojos.Medicine;
-import com.app.pojos.MedicineIncharge;
+import com.app.pojos.LabIncharge;
+import com.app.pojos.LabTests;
 
 @Service
 @Transactional
-public class MedInchargeService implements IMedInchargeService {
+public class LabInchargeService implements ILabInchargeService {
 
 	@Autowired
-	private MedInchargeRepository medInchargeRepo ; 
+	private LabInchargeRepository labInchargeRepo ; 
 	
 	@Autowired
-	private MedicineRepository medRepo ; 
+	private LabTestRepository labTestRepo ; 
 	
 	@Autowired
 	private ModelMapper mapper;
@@ -32,21 +32,21 @@ public class MedInchargeService implements IMedInchargeService {
 	
 	@Override
 	public LoginResponseDTO login(LoginRequestDTO request) {
-		MedicineIncharge medIncharge = medInchargeRepo.findByEmailAndPassword(request.getEmail(), request.getPassword())
+		LabIncharge labIncharge = labInchargeRepo.findByEmailAndPassword(request.getEmail(), request.getPassword())
 				.orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!!!"));
-		System.out.println(medIncharge);
+		System.out.println(labIncharge);
 		
-		LoginResponseDTO resp = mapper.map(medIncharge, LoginResponseDTO.class);
+		LoginResponseDTO resp = mapper.map(labIncharge, LoginResponseDTO.class);
 		System.out.println(resp);
 		return resp;
 	}
 
 	@Override
 	public ProfileDTO showProfile(long id) {
-		MedicineIncharge medIncharge = medInchargeRepo.findById(id)
+		LabIncharge labIncharge = labInchargeRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!!!"));
-		System.out.println(medIncharge);
-		ProfileDTO medInchargeDTO = mapper.map(medIncharge, ProfileDTO.class);
+		System.out.println(labIncharge);
+		ProfileDTO medInchargeDTO = mapper.map(labIncharge, ProfileDTO.class);
 		System.out.println(medInchargeDTO);
 		return medInchargeDTO;
 	}
@@ -54,31 +54,25 @@ public class MedInchargeService implements IMedInchargeService {
 	@Override
 	public String changePassword(long id, String oldPassword, String newPassword) {
 		System.out.println("in service layer change password");
-		MedicineIncharge medIncharge = medInchargeRepo.findById(id)
+		LabIncharge labIncharge = labInchargeRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!!!"));
-		medIncharge.setPassword(newPassword);
+		labIncharge.setPassword(newPassword);
 		return "password changed successfully";
 	}
 
 	
 	@Override
-	public String addMedicine(MedicineDTO medicineDTO) {
+	public String addLabTest(LabTestsDTO labTestDTO) {
 		System.out.println("in service layer add medicine");
-		Medicine med = mapper.map(medicineDTO, Medicine.class);
-		medRepo.save(med);
-		return "medicine added successfully";
+		LabTests labTest = mapper.map(labTestDTO, LabTests.class);
+		labTestRepo.save(labTest);
+		return "lab test added successfully";
 	}
 	
 	@Override
-	public String deleteMedicine(long id) {
-		medRepo.deleteById(id);
-		return "medicine deleted";
-	}
-	
-	@Override
-	public String updateQty(long id, MedQtyUpdateDTO medQtyDTO) {
-		medRepo.udpateMedQty(id, medQtyDTO.getQuantity());
-		return "qty updated successfully";
+	public String deleteLabTest(long id) {
+		labTestRepo.deleteById(id);
+		return "lab test deleted";
 	}
 	
 

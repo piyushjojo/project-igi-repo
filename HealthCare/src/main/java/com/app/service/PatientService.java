@@ -1,7 +1,5 @@
 package com.app.service;
 
-import java.util.Optional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.custom_exceptions.UserAlreadyExists;
 import com.app.dao.PatientRepository;
-import com.app.dto.PatientLoginRequest;
-import com.app.dto.PatientLoginResponse;
-import com.app.dto.PatientProfileDTO;
+import com.app.dto.LoginRequestDTO;
+import com.app.dto.LoginResponseDTO;
 import com.app.dto.PatientSignUpRequest;
+import com.app.dto.ProfileDTO;
 import com.app.pojos.Patient;
 
 @Service
@@ -43,24 +41,24 @@ public class PatientService implements IPatientService {
 	}
 	
 	@Override
-	public PatientLoginResponse login(PatientLoginRequest request) {
+	public LoginResponseDTO login(LoginRequestDTO request) {
 		Patient patient = patientRepo.findByEmailAndPassword(request.getEmail(), request.getPassword())
 				.orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!!!"));
 		System.out.println(patient);
 		
-		PatientLoginResponse resp = mapper.map(patient, PatientLoginResponse.class);
+		LoginResponseDTO resp = mapper.map(patient, LoginResponseDTO.class);
 		System.out.println(resp);
 		return resp;
 	}
 
 	@Override
-	public PatientProfileDTO showProfile(long id) {
+	public ProfileDTO showProfile(long id) {
 		Patient patient = patientRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!!!"));
 		System.out.println(patient);
-		PatientProfileDTO patientProfileDTO = mapper.map(patient, PatientProfileDTO.class);
-		System.out.println(patientProfileDTO);
-		return patientProfileDTO;
+		ProfileDTO profileDto = mapper.map(patient, ProfileDTO.class);
+		System.out.println(profileDto);
+		return profileDto;
 	}
 
 	@Override

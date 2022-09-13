@@ -32,7 +32,9 @@ public class SecurityConfig {
 		antMatchers("/patient/signin","/patient/signout","/patient/profile",
 				"/patient/profile/changePassword/{id}","/patient/signup1" , "/patient/signup2",
 				"/medincharge/signin","/medincharge/profile", "/medincharge/signout" , "/medincharge/addMedicine",
-				"/medincharge/updateQty/{id}" , "/medincharge/deleteMed/{id}").permitAll().
+				"/medincharge/updateQty/{id}" , "/medincharge/deleteMed/{id}",
+				"/labincharge/signin","/labincharge/profile","/labincharge/profile/changePassword/{id}",
+				"/labincharge/signout","/labincharge/deleteLabTest/{id}", "/labincharge/addLabTest").permitAll().
 //		antMatchers("/products/purchase").hasRole("CUSTOMER").
 //		antMatchers("/products/add").hasRole("ADMIN").
 		anyRequest().authenticated().

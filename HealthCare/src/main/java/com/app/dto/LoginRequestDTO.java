@@ -12,11 +12,10 @@ import lombok.ToString;
 @Setter
 @ToString
 @AllArgsConstructor
-public class PatientLoginRequest {
+public class LoginRequestDTO {
 	@NotBlank(message = "email is required")
 	private String email;
 	@NotBlank(message = "password is required")
 	private String password;
-	
 	
 }

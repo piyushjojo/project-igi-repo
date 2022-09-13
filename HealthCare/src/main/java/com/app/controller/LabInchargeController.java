@@ -18,29 +18,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.ApiResponse;
 import com.app.dto.ChangePasswordDTO;
+import com.app.dto.LabTestsDTO;
 import com.app.dto.LoginRequestDTO;
 import com.app.dto.LoginResponseDTO;
-import com.app.dto.MedQtyUpdateDTO;
-import com.app.dto.MedicineDTO;
 import com.app.dto.ProfileDTO;
-import com.app.service.MedInchargeService;
+import com.app.service.ILabInchargeService;
 
 @RestController
-@RequestMapping("/medincharge")
+@RequestMapping("/labincharge")
 @CrossOrigin(origins = "http://localhost:3000")
-public class MedInchargeController {
+public class LabInchargeController {
 	
 	@Autowired
-	private MedInchargeService medInchargeService ; 
+	private ILabInchargeService labInchargeService ; 
 	
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@RequestBody @Valid LoginRequestDTO request,
 			HttpSession httpSession) {
 		System.out.println("in user login " + request);
-//		long id = medInchargeService.getPatientId(request.getEmail());
+//		long id = labInchargeService.getPatientId(request.getEmail());
 		try {
-			LoginResponseDTO response = medInchargeService.login(request);
-			httpSession.setAttribute("medIncharge_login_response", response);
+			LoginResponseDTO response = labInchargeService.login(request);
+			httpSession.setAttribute("labIncharge_login_response", response);
 			return ResponseEntity.ok(response);
 		} catch (RuntimeException e) {
 			System.out.println("err in add emp " + e);
@@ -51,16 +50,16 @@ public class MedInchargeController {
 	@GetMapping("/profile")
 	public ProfileDTO patientProfile(HttpSession httpSession) {
 		System.out.println("in med incharge profile ");
-		LoginResponseDTO medIncharge = (LoginResponseDTO) httpSession.getAttribute("medIncharge_login_response");
-		System.out.println(medInchargeService.showProfile(medIncharge.getId()));
-		return medInchargeService.showProfile(medIncharge.getId());
+		LoginResponseDTO labIncharge = (LoginResponseDTO) httpSession.getAttribute("labIncharge_login_response");
+		System.out.println(labInchargeService.showProfile(labIncharge.getId()));
+		return labInchargeService.showProfile(labIncharge.getId());
 	}
 	
 	@PutMapping("/profile/changePassword/{id}")
 	public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO pcp ,@PathVariable long id){
 		System.out.println("in  controller change password");
 		try {
-			medInchargeService.changePassword(id , pcp.getOldPassword(), pcp.getNewPassword());
+			labInchargeService.changePassword(id , pcp.getOldPassword(), pcp.getNewPassword());
 			return new ResponseEntity<>(new ApiResponse("pasword changed successfully"), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,32 +69,32 @@ public class MedInchargeController {
 	
 	@PostMapping("/signout")
 	public ResponseEntity<?> signout(HttpSession httpSession) {
-		LoginResponseDTO medIncharge = (LoginResponseDTO) httpSession.getAttribute("medIncharge_login_response");
+		LoginResponseDTO labIncharge = (LoginResponseDTO) httpSession.getAttribute("labIncharge_login_response");
 		httpSession.invalidate();
-		return new ResponseEntity<>(new ApiResponse(medIncharge.getName() +" Logged out Successfully"), HttpStatus.OK);
+		return new ResponseEntity<>(new ApiResponse(labIncharge.getName() +" Logged out Successfully"), HttpStatus.OK);
 	}
 	
-	@PostMapping("/addMedicine")
-	public ResponseEntity<?> addMedicine(@RequestBody @Valid MedicineDTO medicineDTO){
-		System.out.println("in add medicine");
+	@PostMapping("/addLabTest")
+	public ResponseEntity<?> addLabTest(@RequestBody @Valid LabTestsDTO labTestDTO){
+		System.out.println("in add lab test");
 		try {
-			medInchargeService.addMedicine(medicineDTO);
-			return new ResponseEntity<>(new ApiResponse("medicine added successfully"), HttpStatus.OK);
+			labInchargeService.addLabTest(labTestDTO);
+			return new ResponseEntity<>(new ApiResponse("lab test added successfully"), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(new ApiResponse("failed to add medicine"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ApiResponse("failed to add lab test"), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
-	@PutMapping("/updateQty/{id}")
-	public ResponseEntity<?> updateQty(@PathVariable long id , @RequestBody MedQtyUpdateDTO medQtyDTO){
-		return new ResponseEntity<>(new ApiResponse(medInchargeService.updateQty(id , medQtyDTO)), HttpStatus.OK);
-	}
+//	@PutMapping("/updateQty/{id}")
+//	public ResponseEntity<?> updateQty(@PathVariable long id , @RequestBody MedQtyUpdateDTO medQtyDTO){
+//		return new ResponseEntity<>(new ApiResponse(labInchargeService.updateQty(id , medQtyDTO)), HttpStatus.OK);
+//	}
 	
-	@DeleteMapping("/deleteMed/{id}") //update quantity
-	public ResponseEntity<?> deleteMedicine(@PathVariable long id){
+	@DeleteMapping("/deleteLabTest/{id}") //update quantity
+	public ResponseEntity<?> deleteLabTest(@PathVariable long id){
 		System.out.println(id);
-		return new ResponseEntity<>(new ApiResponse(medInchargeService.deleteMedicine(id)), HttpStatus.OK);
+		return new ResponseEntity<>(new ApiResponse(labInchargeService.deleteLabTest(id)), HttpStatus.OK);
 	}
 	
 }

@@ -9,12 +9,12 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class MedInchargeLoginResponse {
+public class LoginResponseDTO {
 	private long id ; 
 	private String name;
 	private String email;
 	
-	public MedInchargeLoginResponse(long id ,String name, String email) {
+	public LoginResponseDTO(long id ,String name, String email) {
 		super();
 		this.id = id;
 		this.name = name; 

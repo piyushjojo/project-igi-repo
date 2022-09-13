@@ -1,12 +1,11 @@
 package com.app.service;
 
+import com.app.dto.LabTestsDTO;
 import com.app.dto.LoginRequestDTO;
 import com.app.dto.LoginResponseDTO;
-import com.app.dto.MedQtyUpdateDTO;
-import com.app.dto.MedicineDTO;
 import com.app.dto.ProfileDTO;
 
-public interface IMedInchargeService {
+public interface ILabInchargeService {
 	
 //	long getPatientId(String email);
 	
@@ -15,14 +14,11 @@ public interface IMedInchargeService {
 	
 	String changePassword(long id, String oldPassword, String newPassword);
 	
-	String addMedicine(MedicineDTO medicineDTO);
+	String addLabTest(LabTestsDTO labTestDTO);
 	
-	String deleteMedicine(long id);
-	String updateQty(long id, MedQtyUpdateDTO medQtyDTO);
+	String deleteLabTest(long id);
+//	String updateQty(long id, MedQtyUpdateDTO medQtyDTO);
 	
 //	String deleteUser(long id);
-	
-	
-	
 	
 }

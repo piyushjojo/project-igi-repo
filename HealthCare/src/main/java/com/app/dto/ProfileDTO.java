@@ -18,17 +18,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class PatientProfileDTO {
+public class ProfileDTO {
 	
 	private String email;
-	
 	private String name;
 	private long phone;
-	
 	private String address ; 
-	
 	private LocalDate dob;
-	
 	private Gender gender;
 	
 }

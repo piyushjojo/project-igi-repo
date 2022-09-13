@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dao.PatientRepository;
 import com.app.dto.ApiResponse;
-import com.app.dto.PatientChangePassword;
+import com.app.dto.ChangePasswordDTO;
+import com.app.dto.LoginRequestDTO;
+import com.app.dto.LoginResponseDTO;
 import com.app.dto.PatientEmailDTO;
-import com.app.dto.PatientLoginRequest;
-import com.app.dto.PatientLoginResponse;
-import com.app.dto.PatientProfileDTO;
 import com.app.dto.PatientSignUpRequest;
+import com.app.dto.ProfileDTO;
 import com.app.pojos.Patient;
 import com.app.service.IPatientService;
 
@@ -68,12 +68,12 @@ public class PatientController {
 
 	// add REST end point for user login
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@RequestBody @Valid PatientLoginRequest request,
+	public ResponseEntity<?> authenticateUser(@RequestBody @Valid LoginRequestDTO request,
 			HttpSession httpSession) {
 		System.out.println("in user login " + request);
 //		long id = patientService.getPatientId(request.getEmail());
 		try {
-			PatientLoginResponse response = patientService.login(request);
+			LoginResponseDTO response = patientService.login(request);
 			httpSession.setAttribute("patient_login_response", response);
 			return ResponseEntity.ok(response);
 		} catch (RuntimeException e) {
@@ -83,15 +83,15 @@ public class PatientController {
 	}
 
 	@GetMapping("/profile")
-	public PatientProfileDTO patientProfile(HttpSession httpSession) {
+	public ProfileDTO patientProfile(HttpSession httpSession) {
 		System.out.println("in patient profile ");
-		PatientLoginResponse patient = (PatientLoginResponse) httpSession.getAttribute("patient_login_response");
+		LoginResponseDTO patient = (LoginResponseDTO) httpSession.getAttribute("patient_login_response");
 		System.out.println(patientService.showProfile(patient.getId()));
 		return patientService.showProfile(patient.getId());
 	}
 	
 	@PutMapping("/profile/changePassword/{id}")
-	public ResponseEntity<?> changePassword(@RequestBody PatientChangePassword pcp ,@PathVariable long id){
+	public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO pcp ,@PathVariable long id){
 		System.out.println("in  controller change password");
 		try {
 			patientService.changePassword(id , pcp.getOldPassword(), pcp.getNewPassword());
@@ -111,7 +111,7 @@ public class PatientController {
 
 	@PostMapping("/signout")
 	public ResponseEntity<?> signout(HttpSession httpSession) {
-		PatientLoginResponse patient = (PatientLoginResponse) httpSession.getAttribute("patient_login_response");
+		LoginResponseDTO patient = (LoginResponseDTO) httpSession.getAttribute("patient_login_response");
 		httpSession.invalidate();
 		return new ResponseEntity<>(new ApiResponse(patient.getName() +" Logged out Successfully"), HttpStatus.OK);
 	}
