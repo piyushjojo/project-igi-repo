@@ -31,7 +31,8 @@ public class SecurityConfig {
 		http.csrf().disable().authorizeRequests().
 		antMatchers("/patient/signin","/patient/signout","/patient/profile",
 				"/patient/profile/changePassword/{id}","/patient/signup1" , "/patient/signup2",
-				"/medincharge/signin","/medincharge/profile", "/medincharge/signout" , "/medincharge/addMedicine").permitAll().
+				"/medincharge/signin","/medincharge/profile", "/medincharge/signout" , "/medincharge/addMedicine",
+				"/medincharge/updateQty/{id}" , "/medincharge/deleteMed/{id}").permitAll().
 //		antMatchers("/products/purchase").hasRole("CUSTOMER").
 //		antMatchers("/products/add").hasRole("ADMIN").
 		anyRequest().authenticated().

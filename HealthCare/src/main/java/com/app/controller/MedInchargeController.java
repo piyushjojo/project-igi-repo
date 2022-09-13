@@ -87,13 +87,16 @@ public class MedInchargeController {
 		}
 	}
 	
-	@PostMapping("/updateQty/{id}")
+	
+	
+	@PutMapping("/updateQty/{id}")
 	public ResponseEntity<?> updateQty(@PathVariable long id , @RequestBody MedQtyUpdateDTO medQtyDTO){
 		return new ResponseEntity<>(new ApiResponse(medInchargeService.updateQty(id , medQtyDTO)), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/delete/{id}") //update quantity
+	@DeleteMapping("/deleteMed/{id}") //update quantity
 	public ResponseEntity<?> deleteMedicine(@PathVariable long id){
+		System.out.println(id);
 		return new ResponseEntity<>(new ApiResponse(medInchargeService.deleteMedicine(id)), HttpStatus.OK);
 	}
 	

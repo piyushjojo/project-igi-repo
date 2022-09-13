@@ -71,7 +71,7 @@ public class MedInchargeService implements IMedInchargeService {
 	
 	@Override
 	public String deleteMedicine(long id) {
-		medRepo.deleteById(null);
+		medRepo.deleteById(id);
 		return "medicine deleted";
 	}
 	
