@@ -1,23 +1,24 @@
-package com.app.pojos;
+package com.app.dto;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.app.pojos.Gender;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
-@Table(name = "patient_profile")
 @Getter
 @Setter
 @ToString
-public class Patient extends BaseEntity {
-	
+public class PatientProfileDTO {
 	
 	private String email;
 	
@@ -28,19 +29,6 @@ public class Patient extends BaseEntity {
 	
 	private LocalDate dob;
 	
-	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	
-	//photopath
-	
-	private boolean status ; //active or inactive
-	
-	private String password;
-	
-	public Patient() {
-		
-	}
-	
-	
-
 }

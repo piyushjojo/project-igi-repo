@@ -6,11 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
-@Table(name = "lab_incharge_profile")
-public class LabIncharge {
+@Table(name = "lab_incharge")
+@Getter
+@Setter
+@ToString
+public class LabIncharge extends BaseEntity {
 	
-	@Id
 	private String email ; 
 	
 	private String name ; 

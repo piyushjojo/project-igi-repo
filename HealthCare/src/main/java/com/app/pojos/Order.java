@@ -11,13 +11,20 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name = "order_table")
+@Getter
+@Setter
+@ToString
 public class Order extends BaseEntity{
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "pEmail" )
+	@JoinColumn(name = "patient_id" )
 	private Patient patient ; 
 	
 	private double amount ; 

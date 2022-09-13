@@ -29,7 +29,8 @@ public class SecurityConfig {
 	public SecurityFilterChain configureAuthorization(HttpSecurity http) throws Exception{
 		System.out.println("secutiry configure authorization in security config");
 		http.csrf().disable().authorizeRequests().
-		antMatchers("/patient/signin","/patient/signout").permitAll().
+		antMatchers("/patient/signin","/patient/signout","/patient/profile",
+				"/patient/profile/changePassword/{id}","/patient/signup1" , "/patient/signup2").permitAll().
 //		antMatchers("/products/purchase").hasRole("CUSTOMER").
 //		antMatchers("/products/add").hasRole("ADMIN").
 		anyRequest().authenticated().

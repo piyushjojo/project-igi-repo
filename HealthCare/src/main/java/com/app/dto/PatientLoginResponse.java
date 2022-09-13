@@ -8,15 +8,15 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-
+@NoArgsConstructor
 public class PatientLoginResponse {
+	private long id ; 
 	private String name;
 	private String email;
 	
-	public PatientLoginResponse() {
-		// TODO Auto-generated constructor stub
-	}
-	public PatientLoginResponse(String name, String email) {
+	public PatientLoginResponse(long id ,String name, String email) {
+		super();
+		this.id = id;
 		this.name = name; 
 		this.email = email;
 	}
