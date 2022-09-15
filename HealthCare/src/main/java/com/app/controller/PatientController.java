@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.config.TokenManager;
@@ -35,7 +36,9 @@ import com.app.dto.PatientEmailDTO;
 import com.app.dto.PatientSignUpRequest;
 import com.app.dto.ProfileDTO;
 import com.app.dto.RequestValidateToken;
+import com.app.pojos.Medicine;
 import com.app.pojos.Patient;
+import com.app.service.IMedicineService;
 import com.app.service.IPatientService;
 
 @RestController
@@ -57,6 +60,9 @@ public class PatientController {
 	
 	@Autowired
 	private TokenManager tokenManager;
+	
+	@Autowired
+	private IMedicineService medService;
 
 	public PatientController() {
 		System.out.println("in patient controller " + getClass());
@@ -164,6 +170,14 @@ public class PatientController {
 		//LoginResponseDTO patient = (LoginResponseDTO) httpSession.getAttribute("patient_login_response");
 		httpSession.invalidate();
 		return new ResponseEntity<>(new ApiResponse(" Logged out Successfully"), HttpStatus.OK);
+	}
+	
+	@GetMapping("/ordermed")
+	public ResponseEntity<?> getMedicineList(@RequestParam String name){
+		System.out.println(name);
+		ArrayList<Medicine> medList = medService.findByMedicineName(name);
+		System.out.println(medList);
+		return new ResponseEntity<>(medList, HttpStatus.OK);
 	}
 
 }

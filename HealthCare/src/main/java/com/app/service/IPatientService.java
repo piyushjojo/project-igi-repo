@@ -22,6 +22,7 @@ public interface IPatientService {
 	String deleteUser(long id);
 
 	Patient findByEmail(String email);
+
 	
 
 	
