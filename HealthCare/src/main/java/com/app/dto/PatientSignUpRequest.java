@@ -29,12 +29,12 @@ public class PatientSignUpRequest {
 	@Email(message = "invalid email format")
 	private String email;
 	
-	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})", message = "Blank or Invalid password")
+//	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})", message = "Blank or Invalid password")
 	private String password;
 	
 	//confirm password
 	
-	@NotBlank(message = "mobile no is required")
+//	@NotBlank(message = "mobile no is required")
 	private long phone_no;
 	
 	@NotBlank(message = "address is required")
@@ -45,4 +45,6 @@ public class PatientSignUpRequest {
 	
 	
 	private Gender gender ; 
+	
+	
 }
