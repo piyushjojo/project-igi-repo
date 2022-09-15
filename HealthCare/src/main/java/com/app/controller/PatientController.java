@@ -82,12 +82,11 @@ public class PatientController {
 		}
 	}
 
-	@GetMapping("/profile")
-	public ProfileDTO patientProfile(HttpSession httpSession) {
+	@GetMapping("/profile/{id}")
+	public ProfileDTO patientProfile(@PathVariable long id) {
 		System.out.println("in patient profile ");
-		LoginResponseDTO patient = (LoginResponseDTO) httpSession.getAttribute("patient_login_response");
-		System.out.println(patientService.showProfile(patient.getId()));
-		return patientService.showProfile(patient.getId());
+		System.out.println(patientService.showProfile(id));
+		return patientService.showProfile(id);
 	}
 	
 	@PutMapping("/profile/changePassword/{id}")
@@ -111,9 +110,9 @@ public class PatientController {
 
 	@PostMapping("/signout")
 	public ResponseEntity<?> signout(HttpSession httpSession) {
-		LoginResponseDTO patient = (LoginResponseDTO) httpSession.getAttribute("patient_login_response");
+		//LoginResponseDTO patient = (LoginResponseDTO) httpSession.getAttribute("patient_login_response");
 		httpSession.invalidate();
-		return new ResponseEntity<>(new ApiResponse(patient.getName() +" Logged out Successfully"), HttpStatus.OK);
+		return new ResponseEntity<>(new ApiResponse(" Logged out Successfully"), HttpStatus.OK);
 	}
 
 }
