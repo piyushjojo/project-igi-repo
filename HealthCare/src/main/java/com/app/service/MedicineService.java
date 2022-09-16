@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.dao.MedicineRepository;
+import com.app.dto.OrderMedicineRequestDTO;
 import com.app.pojos.Medicine;
+import com.app.pojos.MedicineOrder;
+import com.app.pojos.Order;
 @Service
 @Transactional
 public class MedicineService implements IMedicineService {
@@ -22,5 +25,7 @@ public class MedicineService implements IMedicineService {
 		System.out.println(medRepo.findByMNameLike(name)+" In service");
 		return medRepo.findByMNameLike(name);
 	}
+
+	
 
 }

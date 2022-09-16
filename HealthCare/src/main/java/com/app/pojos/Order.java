@@ -11,7 +11,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -20,6 +22,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order extends BaseEntity{
 	
 	
@@ -35,5 +39,12 @@ public class Order extends BaseEntity{
 	private LocalDate order_date ;
 	
 	@Enumerated(EnumType.STRING)
-	private PaymentStatus payment_status ; 
+	private PaymentStatus payment_status ;
+
+	public Order(Patient patient) {
+		super();
+		this.patient = patient;
+	} 
+	
+	
 }

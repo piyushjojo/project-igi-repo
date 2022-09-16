@@ -32,6 +32,7 @@ import com.app.dto.ApiResponse;
 import com.app.dto.ChangePasswordDTO;
 import com.app.dto.LoginRequestDTO;
 import com.app.dto.LoginResponseDTO;
+import com.app.dto.OrderMedicineRequestDTO;
 import com.app.dto.PatientEmailDTO;
 import com.app.dto.PatientSignUpRequest;
 import com.app.dto.ProfileDTO;
@@ -39,6 +40,7 @@ import com.app.dto.RequestValidateToken;
 import com.app.pojos.Medicine;
 import com.app.pojos.Patient;
 import com.app.service.IMedicineService;
+import com.app.service.IOrderService;
 import com.app.service.IPatientService;
 
 @RestController
@@ -63,6 +65,9 @@ public class PatientController {
 	
 	@Autowired
 	private IMedicineService medService;
+	
+	@Autowired
+	private IOrderService orderService;
 
 	public PatientController() {
 		System.out.println("in patient controller " + getClass());
@@ -178,6 +183,14 @@ public class PatientController {
 		ArrayList<Medicine> medList = medService.findByMedicineName(name);
 		System.out.println(medList);
 		return new ResponseEntity<>(medList, HttpStatus.OK);
+	}
+	
+	@PostMapping("/order/{id}")
+	public ResponseEntity<?> checkOutOrder(@PathVariable long id,@RequestBody ArrayList<OrderMedicineRequestDTO> orderList){
+		System.out.println(orderList);
+		orderService.saveOrderDetails(id, orderList);
+		
+		return new ResponseEntity<>(new ApiResponse(" Added Sussessfully"), HttpStatus.OK);
 	}
 
 }

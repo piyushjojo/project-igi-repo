@@ -5,8 +5,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "medicine_order")
+@AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class MedicineOrder extends BaseEntity{
 	
 	@ManyToOne
