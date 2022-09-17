@@ -26,6 +26,11 @@ public class MedicineService implements IMedicineService {
 		return medRepo.findByMNameLike(name);
 	}
 
+	@Override
+	public void updateMedicineQty(long id, int qty) {
+		medRepo.reduceMedQty(id, qty);
+	}
+
 	
 
 }

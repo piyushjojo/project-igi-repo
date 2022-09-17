@@ -22,6 +22,7 @@ public class Patient extends BaseEntity {
 	private String email;
 	
 	private String name;
+	
 	private long phone;
 	
 	private String address ; 
@@ -36,6 +37,8 @@ public class Patient extends BaseEntity {
 	private boolean status ; //active or inactive
 	
 	private String password;
+	
+	private double wallet;
 	
 	public Patient() {
 		

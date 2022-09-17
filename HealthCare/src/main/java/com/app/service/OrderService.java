@@ -13,6 +13,8 @@ import com.app.dao.IMedicineOrderRepo;
 import com.app.dao.IOrderRepository;
 import com.app.dao.PatientRepository;
 import com.app.dto.OrderMedicineRequestDTO;
+import com.app.dto.OrderMedicineResponseDTO;
+import com.app.dto.PaymentProcessingDto;
 import com.app.pojos.Order;
 import com.app.pojos.OrderStatus;
 import com.app.pojos.Patient;
@@ -30,9 +32,10 @@ public class OrderService implements IOrderService {
 	private IMedicineOrderService medOrdService;
 	@Autowired
 	private IMedicineOrderRepo medOrdRepo;
+	
 
 	@Override
-	public String saveOrderDetails(long id, ArrayList<OrderMedicineRequestDTO> orderList) {
+	public Order saveOrderDetails(long id, ArrayList<OrderMedicineRequestDTO> orderList) {
 		Patient patient=patientRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not valid"));;
 		orderRepo.save(new Order(patient));
 		Order order=orderRepo.findByPatient(patient);
@@ -47,7 +50,25 @@ public class OrderService implements IOrderService {
 		System.out.println(sum+" After sum");
 		orderRepo.updateOrder(sum, LocalDate.now(), OrderStatus.INITIATED, PaymentStatus.UNPAID, order.getId());
 		
-		return "Order added successfully";
+		return order;
+	}
+	
+	@Override
+	public OrderMedicineResponseDTO fetchOMRSD(Order order) {
+		OrderMedicineResponseDTO omrsd=new OrderMedicineResponseDTO(medOrdRepo.findByOrder(order),orderRepo.findById(order.getId()).orElseThrow(() -> new ResourceNotFoundException("Not valid")));
+		System.out.println("------------------------------------------");
+		System.out.println(omrsd);
+		System.out.println("------------------------------------------");
+		return omrsd;
+	}
+	
+	@Override
+	public OrderMedicineResponseDTO paymentUpdateDetails(PaymentProcessingDto paymentDto,long id) {
+		orderRepo.updateOrderStatusDetails(paymentDto.getOrderId());
+		patientRepo.updatePatientWallet(paymentDto.getOrderAmount(), id);
+		Order order=orderRepo.findById(paymentDto.getOrderId()).orElseThrow(() -> new ResourceNotFoundException("Not valid"));
+		OrderMedicineResponseDTO omrsd = fetchOMRSD(order);
+		return omrsd;
 	}
 
 }

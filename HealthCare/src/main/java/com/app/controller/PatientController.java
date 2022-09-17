@@ -33,11 +33,14 @@ import com.app.dto.ChangePasswordDTO;
 import com.app.dto.LoginRequestDTO;
 import com.app.dto.LoginResponseDTO;
 import com.app.dto.OrderMedicineRequestDTO;
+import com.app.dto.OrderMedicineResponseDTO;
 import com.app.dto.PatientEmailDTO;
 import com.app.dto.PatientSignUpRequest;
+import com.app.dto.PaymentProcessingDto;
 import com.app.dto.ProfileDTO;
 import com.app.dto.RequestValidateToken;
 import com.app.pojos.Medicine;
+import com.app.pojos.Order;
 import com.app.pojos.Patient;
 import com.app.service.IMedicineService;
 import com.app.service.IOrderService;
@@ -68,6 +71,8 @@ public class PatientController {
 	
 	@Autowired
 	private IOrderService orderService;
+	
+
 
 	public PatientController() {
 		System.out.println("in patient controller " + getClass());
@@ -188,9 +193,18 @@ public class PatientController {
 	@PostMapping("/order/{id}")
 	public ResponseEntity<?> checkOutOrder(@PathVariable long id,@RequestBody ArrayList<OrderMedicineRequestDTO> orderList){
 		System.out.println(orderList);
-		orderService.saveOrderDetails(id, orderList);
+		Order order = orderService.saveOrderDetails(id, orderList);
+		OrderMedicineResponseDTO omrsd = orderService.fetchOMRSD(order);
 		
-		return new ResponseEntity<>(new ApiResponse(" Added Sussessfully"), HttpStatus.OK);
+		return new ResponseEntity<>(omrsd, HttpStatus.OK);
+	}
+	
+	@PostMapping("/payment/{id}")
+	public ResponseEntity<?> paymentProcessing(@PathVariable long id,@RequestBody PaymentProcessingDto paymentDto){
+		System.out.println("In payment Processing "+paymentDto);
+		OrderMedicineResponseDTO omrsd = orderService.paymentUpdateDetails(paymentDto, id);
+		System.out.println(omrsd);
+		return new ResponseEntity<>(omrsd,HttpStatus.OK);
 	}
 
 }

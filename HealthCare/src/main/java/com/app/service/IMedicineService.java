@@ -9,4 +9,6 @@ import com.app.pojos.Order;
 public interface IMedicineService {
 	ArrayList<Medicine> findByMedicineName(String name);
 	
+	void updateMedicineQty(long id,int qty);
+	
 }
