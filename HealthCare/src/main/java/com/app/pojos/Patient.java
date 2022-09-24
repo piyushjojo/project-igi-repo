@@ -34,7 +34,7 @@ public class Patient extends BaseEntity {
 	
 	//photopath
 	
-	private boolean status ; //active or inactive
+	private boolean status = true; //active or inactive
 	
 	private String password;
 	
