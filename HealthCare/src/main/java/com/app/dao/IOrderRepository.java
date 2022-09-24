@@ -13,7 +13,9 @@ import com.app.pojos.Patient;
 import com.app.pojos.PaymentStatus;
 
 public interface IOrderRepository extends JpaRepository<Order, Long> {
-	Order findByPatient(Patient p);
+	
+	@Query("select o from Order o where o.patient=?1 and o.id=?2")
+	Order findByPatient(Patient p,long id);
 	
 	@Modifying
 	@Query("update Order o set o.amount=?1, o.order_date=?2, o.order_status=?3, o.payment_status=?4 where o.id=?5 ")
