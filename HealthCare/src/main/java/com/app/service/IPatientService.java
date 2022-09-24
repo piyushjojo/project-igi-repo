@@ -1,8 +1,5 @@
 package com.app.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import com.app.dto.LoginRequestDTO;
 import com.app.dto.LoginResponseDTO;
 import com.app.dto.PatientSignUpRequest;

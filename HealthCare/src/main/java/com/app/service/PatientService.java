@@ -36,8 +36,8 @@ public class PatientService implements IPatientService , UserDetailsService {
 	
 	@Override
 	public String signUp(PatientSignUpRequest request) {
-		Patient patient = patientRepo.findByEmail(request.getEmail());
-		if(patient == null || !patient.isStatus()) {
+		Patient patient = patientRepo.findActiveUser(request.getEmail());
+		if(patient == null) {
 			patient = mapper.map(request, Patient.class);
 			patientRepo.save(patient);
 			return "patient added successfully";
@@ -88,7 +88,7 @@ public class PatientService implements IPatientService , UserDetailsService {
 
 		try
 		{
-			Patient userEnt=patientRepo.findByEmail(username);
+			Patient userEnt=patientRepo.findActiveUser(username);
 			System.out.println("in load service sop username : " + username + " and user ent " + userEnt );
 			return new org.springframework.security.core.userdetails.User(userEnt.getEmail(), userEnt.getPassword(), new ArrayList<>());
 		}
@@ -101,7 +101,7 @@ public class PatientService implements IPatientService , UserDetailsService {
 
 	@Override
 	public Patient findByEmail(String email) {
-		return patientRepo.findByEmail(email);
+		return patientRepo.findActiveUser(email);
 	}
 	
 	

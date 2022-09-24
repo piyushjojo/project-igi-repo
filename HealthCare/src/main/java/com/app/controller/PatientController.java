@@ -82,8 +82,8 @@ public class PatientController {
 	@PostMapping("/signup1")
 	public ResponseEntity<?> signUp(@RequestBody @Valid PatientEmailDTO patientEmailDTO){
 		System.out.println("in signup email confirmation page");
-		Patient patient = patientRepo.findByEmail(patientEmailDTO.getEmail());
-		if(patient == null || !patient.isStatus()) {
+		Patient patient = patientRepo.findActiveUser(patientEmailDTO.getEmail());
+		if(patient == null) {
 			return new ResponseEntity<>(new ApiResponse("new user"), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(new ApiResponse("user already exist"), HttpStatus.BAD_REQUEST);
@@ -94,7 +94,6 @@ public class PatientController {
 	@PostMapping("/signup2")
 	public ResponseEntity<?> signUp(@RequestBody  @Valid PatientSignUpRequest request){
 		System.out.println("in user signup ");
-		
 		try {
 			return ResponseEntity.ok(new ApiResponse(patientService.signUp(request)));
 		} catch (RuntimeException e) {
@@ -119,7 +118,9 @@ public class PatientController {
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
 		
 		 Patient u= patientService.findByEmail(request.getEmail());
-		
+		if(!u.isStatus()){
+			return new ResponseEntity<>(new ApiResponse("Invalid Credentials"), HttpStatus.BAD_REQUEST);
+		}
 		final String jwtToken = tokenManager.generateJwtToken(userDetails);
 		return ResponseEntity.ok(new LoginResponseDTO(jwtToken,u.getId(), u.getName(),  u.getEmail()));
 	}
