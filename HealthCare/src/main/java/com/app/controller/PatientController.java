@@ -207,5 +207,16 @@ public class PatientController {
 		System.out.println(omrsd);
 		return new ResponseEntity<>(omrsd,HttpStatus.OK);
 	}
+	
+	@PutMapping("/walletRechange/{id}")
+	public ResponseEntity<?> walletRecharge(@PathVariable long id , @RequestParam double amount){
+		try {
+			patientService.walletRecharge(id , amount);
+			return new ResponseEntity<>(new ApiResponse("amount updated successfully"), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(new ApiResponse("transaction failed"), HttpStatus.BAD_REQUEST);
+		}
+	}
 
 }

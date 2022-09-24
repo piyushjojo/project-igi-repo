@@ -20,6 +20,8 @@ public interface IPatientService {
 
 	Patient findByEmail(String email);
 
+	String walletRecharge(long id, double amount);
+
 	
 
 	
