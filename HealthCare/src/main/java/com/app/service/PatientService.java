@@ -103,6 +103,14 @@ public class PatientService implements IPatientService , UserDetailsService {
 	public Patient findByEmail(String email) {
 		return patientRepo.findActiveUser(email);
 	}
+
+	@Override
+	public String walletRecharge(long id, double amount) {
+		Patient patient = patientRepo.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!!!"));
+		patient.setWallet(patient.getWallet() + amount);
+		return "amount added successfully";
+	}
 	
 	
 

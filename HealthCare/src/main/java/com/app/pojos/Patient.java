@@ -32,8 +32,6 @@ public class Patient extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	
-	//photopath
-	
 	private boolean status = true; //active or inactive
 	
 	private String password;
