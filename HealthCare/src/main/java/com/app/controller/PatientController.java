@@ -218,5 +218,11 @@ public class PatientController {
 			return new ResponseEntity<>(new ApiResponse("transaction failed"), HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@GetMapping("/orderhistory/{id}")
+		public ResponseEntity<?> fetchOrderList(@PathVariable long id){
+		System.out.println(orderService.fetchOrderlist(id)+" in controller fetch orderlist");
+		return new ResponseEntity<>(orderService.fetchOrderlist(id), HttpStatus.OK);
+	}
 
 }

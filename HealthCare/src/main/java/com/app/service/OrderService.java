@@ -13,6 +13,7 @@ import com.app.dao.IMedicineOrderRepo;
 import com.app.dao.IOrderRepository;
 import com.app.dao.PatientRepository;
 import com.app.dto.EmailDetails;
+import com.app.dto.OrderHistoryResponseDTO;
 import com.app.dto.OrderMedicineRequestDTO;
 import com.app.dto.OrderMedicineResponseDTO;
 import com.app.dto.PaymentProcessingDto;
@@ -90,9 +91,15 @@ public class OrderService implements IOrderService {
 		msgBody+="Thank You For Ordering "+"\n";
 		String subject="Order Details";
 		EmailDetails details=new EmailDetails(p.getEmail(),msgBody,subject);
-		String sendSimpleMail = emailService.sendSimpleMail(details);
-		System.out.println(sendSimpleMail);
+//		String sendSimpleMail = emailService.sendSimpleMail(details);
+//		System.out.println(sendSimpleMail);
 		return omrsd;
+	}
+	
+	@Override 
+	public OrderHistoryResponseDTO fetchOrderlist(long id) {
+		System.out.println("fetch order list");
+		return new OrderHistoryResponseDTO(orderRepo.findByPatientId(id));
 	}
 
 }
