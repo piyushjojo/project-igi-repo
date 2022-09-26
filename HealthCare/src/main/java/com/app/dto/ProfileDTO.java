@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.app.pojos.Gender;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class ProfileDTO {
 	
 	private String email;
 	private String name;
+	
 	private long phone;
 	private String address ; 
 	private LocalDate dob;

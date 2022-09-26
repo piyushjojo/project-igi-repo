@@ -211,9 +211,9 @@ public class PatientController {
 	
 	@PutMapping("/walletRecharge/{id}")
 	public ResponseEntity<?> recharge(@PathVariable long id , @RequestBody WalletRechargeDTO rec){
-		System.out.println("in wallet reacharge");
+		System.out.println("in wallet reacharge"+id+" "+rec);
 		try {
-			patientService.walletRecharge(id , rec.getAmount());
+			patientService.walletRecharge(id , rec.getAmt());
 			return new ResponseEntity<>(new ApiResponse("amount updated successfully"), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -228,5 +228,12 @@ public class PatientController {
 		System.out.println(orderService.fetchOrderlist(id)+" in controller fetch orderlist");
 		return new ResponseEntity<>(orderService.fetchOrderlist(id), HttpStatus.OK);
 	}
+	
+	@GetMapping("/wallet/{id}")
+	public ResponseEntity<?> getWallet(@PathVariable long id){
+		Patient p=patientService.getWallet(id);
+		return new ResponseEntity<>(p.getWallet(),HttpStatus.OK);
+	}
+	
 
 }

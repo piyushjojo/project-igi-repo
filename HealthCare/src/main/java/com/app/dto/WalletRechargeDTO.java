@@ -12,5 +12,5 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class WalletRechargeDTO {
-	private double amount;
+	private double amt;
 }

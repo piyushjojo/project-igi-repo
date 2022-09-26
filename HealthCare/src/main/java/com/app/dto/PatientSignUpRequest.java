@@ -8,6 +8,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 
 import com.app.pojos.Gender;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,7 +36,8 @@ public class PatientSignUpRequest {
 	//confirm password
 	
 //	@NotBlank(message = "mobile no is required")
-	private long phone_no;
+	@JsonProperty(value = "phone_no")
+	private long phone;
 	
 	@NotBlank(message = "address is required")
 	private String address ; 

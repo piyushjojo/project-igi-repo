@@ -111,6 +111,12 @@ public class PatientService implements IPatientService , UserDetailsService {
 		patient.setWallet(patient.getWallet() + amount);
 		return "amount added successfully";
 	}
+
+	@Override
+	public Patient getWallet(long id) {
+		
+		return patientRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!!!"));
+	}
 	
 	
 

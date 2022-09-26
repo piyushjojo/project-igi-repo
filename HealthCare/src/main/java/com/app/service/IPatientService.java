@@ -22,6 +22,8 @@ public interface IPatientService {
 
 	String walletRecharge(long id, double amount);
 
+	Patient getWallet(long id);
+
 	
 
 	

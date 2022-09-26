@@ -1,0 +1,42 @@
+drop database project_igi;
+create database project_igi; 
+use project_igi;
+
+insert into patient_profile values (default,"a" , "1990-01-01" ,"a" , "MALE" , "a" , "a" , 9876543210,1);
+select * from patient_profile;
+delete from patient_profile where email="a";
+update patient_profile set wallet=10000;
+update patient_profile set status=true;
+
+
+select * from medicine;
+
+Amoxicillin
+Ativan
+Atorvastatin
+Azithromycin
+Benzonatate
+Brilinta
+Bunavail
+
+insert into medicine values(default,"m","Bunavail",200,20);
+insert into medicine values(default,"m1","Amoxicillin",400,40);
+insert into medicine values(default,"m2","Ativan",100,60);
+insert into medicine values(default,"m3","Atorvastatin",205,80);
+insert into medicine values(default,"m4","Benzonatate",350,100);
+insert into medicine values(default,"m5","Brilinta",450,120);
+insert into medicine values(default,"m5","zzzzzz",450,120);
+desc medicine;
+
+
+
+
+ show tables;
+select * from order_table;
+select * from medicine_order;
+select * from medicine;
+delete from medicine_order where 1=1;
+delete from order_table where 1=1;
+delete from medicine where 1=1;
+
+alter table patient_profile drop column wallet

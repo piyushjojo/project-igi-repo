@@ -36,7 +36,7 @@ public class SecurityConfig {
 				"/labincharge/signin","/labincharge/profile","/labincharge/profile/changePassword/{id}",
 				"/labincharge/signout","/labincharge/deleteLabTest/{id}", "/labincharge/addLabTest","/patient/*","/patient/order/{id}",
 				"/patient/profile/delete/{id}" ,"/patient/payment/{id}","/patient/orderhistory/{id}",
-				 "/patient/walletRecharge/{id}").permitAll().
+				 "/patient/walletRecharge/{id}","/patient/wallet/{id}").permitAll().
 //		antMatchers("/products/purchase").hasRole("CUSTOMER").
 //		antMatchers("/products/add").hasRole("ADMIN").
 		anyRequest().authenticated().
