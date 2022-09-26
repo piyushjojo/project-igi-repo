@@ -39,6 +39,7 @@ import com.app.dto.PatientSignUpRequest;
 import com.app.dto.PaymentProcessingDto;
 import com.app.dto.ProfileDTO;
 import com.app.dto.RequestValidateToken;
+import com.app.dto.WalletRechargeDTO;
 import com.app.pojos.Medicine;
 import com.app.pojos.Order;
 import com.app.pojos.Patient;
@@ -122,7 +123,7 @@ public class PatientController {
 			return new ResponseEntity<>(new ApiResponse("Invalid Credentials"), HttpStatus.BAD_REQUEST);
 		}
 		final String jwtToken = tokenManager.generateJwtToken(userDetails);
-		return ResponseEntity.ok(new LoginResponseDTO(jwtToken,u.getId(), u.getName(),  u.getEmail()));
+		return ResponseEntity.ok(new LoginResponseDTO(jwtToken,u.getId(), u.getName(),  u.getEmail() , u.getWallet()));
 	}
 	
 	@PostMapping("/validate-token")
@@ -203,21 +204,24 @@ public class PatientController {
 	@PostMapping("/payment/{id}")
 	public ResponseEntity<?> paymentProcessing(@PathVariable long id,@RequestBody PaymentProcessingDto paymentDto){
 		System.out.println("In payment Processing "+paymentDto);
-		OrderMedicineResponseDTO omrsd = orderService.paymentUpdateDetails(paymentDto, id);
+		OrderMedicineResponseDTO omrsd =orderService.paymentUpdateDetails(paymentDto, id);
 		System.out.println(omrsd);
 		return new ResponseEntity<>(omrsd,HttpStatus.OK);
 	}
 	
-	@PutMapping("/walletRechange/{id}")
-	public ResponseEntity<?> walletRecharge(@PathVariable long id , @RequestParam double amount){
+	@PutMapping("/walletRecharge/{id}")
+	public ResponseEntity<?> recharge(@PathVariable long id , @RequestBody WalletRechargeDTO rec){
+		System.out.println("in wallet reacharge");
 		try {
-			patientService.walletRecharge(id , amount);
+			patientService.walletRecharge(id , rec.getAmount());
 			return new ResponseEntity<>(new ApiResponse("amount updated successfully"), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(new ApiResponse("transaction failed"), HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+
 	
 	@GetMapping("/orderhistory/{id}")
 		public ResponseEntity<?> fetchOrderList(@PathVariable long id){
