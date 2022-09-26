@@ -12,23 +12,11 @@ function Navbar() {
   };
   return (
     <div className="navbar">
-      <div className="leftSide" id={openLinks ? "open" : "close"}>
-        {/* <img src={Logo} /> */}
-        <div className="hiddenLinks">
-          <Link to="/"> Home </Link>
-          <Link to="/about"> About </Link>
-          <Link to="/menu"> Services </Link>
-          <Link to="/patient/signin"> SignIn </Link>
-          <Link to="/register"> Register </Link>
-          <Link to="/custLogin">custLogin</Link>
-        </div>
-      </div>
       <div className="rightSide">
         <Link to="/"> Home </Link>
         <Link to="/about"> About </Link>
         <Link to="/menu"> Services </Link>
-        <Link to="/patient/signin"> SignIn </Link>
-        <Link to="/register"> Register </Link>
+
         <button onClick={toggleNavbar}>Reorder</button>
       </div>
     </div>
@@ -36,3 +24,20 @@ function Navbar() {
 }
 
 export default Navbar;
+
+/*
+<div className="leftSide" id={openLinks ? "open" : "close"}>
+        {/* <img src={Logo} /> */ //}
+{
+  /* <div className="hiddenLinks">
+          <Link to="/"> Home </Link>
+          <Link to="/about"> About </Link>
+          <Link to="/menu"> Services </Link>
+          <Link to="/patient/signin"> SignIn </Link>
+          <Link to="/register"> Register </Link>
+          <Link to="/custLogin">custLogin</Link>
+        </div> */
+}
+//</div>
+
+//*/

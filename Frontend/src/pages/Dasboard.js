@@ -1,38 +1,15 @@
-import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { Route, Routes, Link, BrowserRouter, Switch } from "react-router-dom";
+import PatientLogin from "./PatientLogin";
+import Home from "./Home";
+
+import Sidebar from "../Components/Sidebar.js";
 
 function Dashboard() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
-  const handleClick = () => {
-    //   const login = { email, password };
-
-    axios.post(`http://localhost:8080/patient/signout`).then(
-      (response) => {
-        //   console.log(email);
-        //   console.log(password);
-        // toast.success('login successfull');
-        console.log("success");
-        console.log(response);
-        window.location.href = "/patient/signin";
-        //localStorage.setItem("c_id", response.data.c_id);
-      },
-      (error) => {
-        //alert("Invalid Login Details", error);
-        toast.error("invalid login");
-        console.log(error);
-        console.log("Error");
-      }
-    );
-  };
-
   return (
     <div>
+      <Sidebar />
+
       <h1>Welcome Page</h1>
-      <button className="btn" onClick={handleClick}>
-        Log Out
-      </button>
     </div>
   );
 }

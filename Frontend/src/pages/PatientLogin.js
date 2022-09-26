@@ -27,11 +27,9 @@ function PatientLogin() {
       (response) => {
         console.log(email);
         console.log(password);
-        // toast.success('login successfull');
         console.log("success");
         console.log(response);
         window.location.href = "/dashboard";
-        localStorage.setItem("c_id", response.data.c_id);
       },
       (error) => {
         alert("Invalid Login Details", error);
@@ -49,7 +47,7 @@ function PatientLogin() {
         <div className="rightSide">
           <h1> Patient SignIn</h1>
 
-          <Form inline>
+          <Form>
             <FormGroup className="mb-2 me-sm-2 mb-sm-0">
               <Input
                 id="email"
@@ -70,13 +68,10 @@ function PatientLogin() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormGroup>
-            <div class="text-center">
+            <div className="text-center">
               <Button
                 disabled={email && password ? false : true}
-                title="Button"
-                onPress={() => {
-                  console.log("sdasds");
-                }}
+                className="btn btn-primary"
                 onClick={handleClick}
               >
                 Submit
