@@ -10,15 +10,21 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name = "medical_history")
-public class MedicalHistory {
-	
-	@Id
-	private String id;
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+public class MedicalHistory extends BaseEntity{
 	
 	@OneToOne
-	@JoinColumn(name = "patient_email" , nullable = false)
+	@JoinColumn(name = "patient_id" , nullable = false)
 	@MapsId
 	private Patient patient ; 
 	

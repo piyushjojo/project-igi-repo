@@ -11,13 +11,24 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name = "order_table")
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order extends BaseEntity{
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "pEmail" )
+	@JoinColumn(name = "patient_id" )
 	private Patient patient ; 
 	
 	private double amount ; 
@@ -28,5 +39,12 @@ public class Order extends BaseEntity{
 	private LocalDate order_date ;
 	
 	@Enumerated(EnumType.STRING)
-	private PaymentStatus payment_status ; 
+	private PaymentStatus payment_status ;
+
+	public Order(Patient patient) {
+		super();
+		this.patient = patient;
+	} 
+	
+	
 }

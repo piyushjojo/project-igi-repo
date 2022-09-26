@@ -29,7 +29,12 @@ public class SecurityConfig {
 	public SecurityFilterChain configureAuthorization(HttpSecurity http) throws Exception{
 		System.out.println("secutiry configure authorization in security config");
 		http.csrf().disable().authorizeRequests().
-		antMatchers("/patient/signin","/patient/signout").permitAll().
+		antMatchers("/patient/signin","/patient/signout","/patient/profile/{id}",
+				"/patient/profile/changePassword/{id}","/patient/signup1" , "/patient/signup2",
+				"/medincharge/signin","/medincharge/profile", "/medincharge/signout" , "/medincharge/addMedicine",
+				"/medincharge/updateQty/{id}" , "/medincharge/deleteMed/{id}",
+				"/labincharge/signin","/labincharge/profile","/labincharge/profile/changePassword/{id}",
+				"/labincharge/signout","/labincharge/deleteLabTest/{id}", "/labincharge/addLabTest","/patient/*","/patient/order/{id}","/patient/profile/delete/{id}" ,"/patient/payment/{id}","/patient/orderhistory/{id}").permitAll().
 //		antMatchers("/products/purchase").hasRole("CUSTOMER").
 //		antMatchers("/products/add").hasRole("ADMIN").
 		anyRequest().authenticated().
