@@ -65,6 +65,12 @@ public class MedInchargeService implements IMedInchargeService {
 	public String addMedicine(MedicineDTO medicineDTO) {
 		System.out.println("in service layer add medicine");
 		Medicine med = mapper.map(medicineDTO, Medicine.class);
+		
+		Medicine checkMed = medRepo.findByName(medicineDTO.getName());
+		if(checkMed != null) {
+			medRepo.udpateMedQty(checkMed.getId(), medicineDTO.getQuantity());
+			return "medicine already exist , thus qty updated.";
+		}
 		medRepo.save(med);
 		return "medicine added successfully";
 	}

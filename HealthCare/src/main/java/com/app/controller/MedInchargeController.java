@@ -86,7 +86,7 @@ public class MedInchargeController {
 			return new ResponseEntity<>(new ApiResponse("failed to add medicine"), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PutMapping("/updateQty/{id}")
 	public ResponseEntity<?> updateQty(@PathVariable long id , @RequestBody MedQtyUpdateDTO medQtyDTO){
 		return new ResponseEntity<>(new ApiResponse(medInchargeService.updateQty(id , medQtyDTO)), HttpStatus.OK);

@@ -17,6 +17,9 @@ public interface MedicineRepository extends JpaRepository<Medicine, Long> {
 	ArrayList<Medicine> findByMNameLike(String name);
 //	ArrayList<Medicine> findById(long id);
 	
+	
+	Medicine findByName(String name);
+	
 	@Modifying
 	@Query("update Medicine m set m.quantity = m.quantity - ?2 where m.id = ?1 ")
 	void reduceMedQty(long id, int qty);
