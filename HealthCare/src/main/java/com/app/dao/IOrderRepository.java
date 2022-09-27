@@ -29,4 +29,11 @@ public interface IOrderRepository extends JpaRepository<Order, Long> {
 //	ArrayList<Order> findByOrdersPatientId(long id);
 	
 	ArrayList<Order> findByPatientId(long id);
+	
+	@Query("select o from Order o where o.payment_status='PAID'")
+	ArrayList<Order> fetchOrderList();
+	
+	@Modifying
+	@Query("update Order o set  o.order_status='DISPATCHED' where o.id=?1")
+	void updateOrderStatus(long orderId);
 }

@@ -19,6 +19,8 @@ public interface IOrderService {
 	OrderMedicineResponseDTO paymentUpdateDetails(PaymentProcessingDto paymentDto,long id);
 
 	OrderHistoryResponseDTO fetchOrderlist(long id);
+
+	void updateOrderStatus(long orderId);
 	
 	
 }

@@ -101,5 +101,10 @@ public class OrderService implements IOrderService {
 		System.out.println("fetch order list");
 		return new OrderHistoryResponseDTO(orderRepo.findByPatientId(id));
 	}
+	
+	@Override
+	public void updateOrderStatus(long orderId) {
+		orderRepo.updateOrderStatus(orderId);
+	}
 
 }

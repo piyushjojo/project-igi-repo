@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dao.IOrderRepository;
 import com.app.dto.ApiResponse;
 import com.app.dto.ChangePasswordDTO;
 import com.app.dto.LoginRequestDTO;
@@ -23,6 +24,7 @@ import com.app.dto.LoginResponseDTO;
 import com.app.dto.MedQtyUpdateDTO;
 import com.app.dto.MedicineDTO;
 import com.app.dto.ProfileDTO;
+import com.app.service.IOrderService;
 import com.app.service.MedInchargeService;
 
 @RestController
@@ -32,6 +34,12 @@ public class MedInchargeController {
 	
 	@Autowired
 	private MedInchargeService medInchargeService ; 
+	
+	@Autowired
+	private IOrderRepository orderRepo;
+	
+	@Autowired
+	private IOrderService orderService;
 	
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@RequestBody @Valid LoginRequestDTO request,
@@ -96,6 +104,20 @@ public class MedInchargeController {
 	public ResponseEntity<?> deleteMedicine(@PathVariable long id){
 		System.out.println(id);
 		return new ResponseEntity<>(new ApiResponse(medInchargeService.deleteMedicine(id)), HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/fetchorders")
+	public ResponseEntity<?> fetchOrders(){
+		
+	return new ResponseEntity<>(orderRepo.fetchOrderList(), HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateorder/{id}")
+	
+	public ResponseEntity<?> updateOrderStatus(@PathVariable long id){
+		orderService.updateOrderStatus(id);
+		return new ResponseEntity<>(new ApiResponse("Order Dispatched"), HttpStatus.OK);
 	}
 	
 }
