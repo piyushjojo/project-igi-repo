@@ -1,12 +1,7 @@
 package com.app.service;
 
-import java.util.ArrayList;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +16,7 @@ import com.app.pojos.Patient;
 
 @Service
 @Transactional
-public class PatientService implements IPatientService , UserDetailsService {
+public class PatientService implements IPatientService /* , UserDetailsService */ {
 
 	@Autowired
 	private PatientRepository patientRepo;
@@ -84,22 +79,6 @@ public class PatientService implements IPatientService , UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-		try
-		{
-			Patient userEnt=patientRepo.findActiveUser(username);
-			System.out.println("in load service sop username : " + username + " and user ent " + userEnt );
-			return new org.springframework.security.core.userdetails.User(userEnt.getEmail(), userEnt.getPassword(), new ArrayList<>());
-		}
-		catch (Exception e)
-		{
-			throw new  UsernameNotFoundException("Error Fetching User Data",e);
-		}
-		
-	}
-
-	@Override
 	public Patient findByEmail(String email) {
 		return patientRepo.findActiveUser(email);
 	}
@@ -117,7 +96,4 @@ public class PatientService implements IPatientService , UserDetailsService {
 		
 		return patientRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Bad Credentials !!!!!!"));
 	}
-	
-	
-
 }

@@ -22,31 +22,28 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class PatientSignUpRequest {
-	//To DO : add validation rules 
+	// To DO : add validation rules
 	@NotBlank(message = "name is required")
 	private String name;
-	
+
 	@NotBlank(message = "email is required")
 	@Email(message = "invalid email format")
 	private String email;
-	
+
 //	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[#@$*]).{5,20})", message = "Blank or Invalid password")
 	private String password;
-	
-	//confirm password
-	
+
+
 //	@NotBlank(message = "mobile no is required")
 	@JsonProperty(value = "phone_no")
 	private long phone;
-	
+
 	@NotBlank(message = "address is required")
-	private String address ; 
-	
+	private String address;
+
 	@PastOrPresent(message = "dob must be provided")
-	private LocalDate dob ; 
-	
-	
-	private Gender gender ; 
-	
-	
+	private LocalDate dob;
+
+	private Gender gender;
+
 }

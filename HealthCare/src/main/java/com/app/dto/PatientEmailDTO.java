@@ -12,5 +12,5 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class PatientEmailDTO {
-	private String email ; 
+	private String email;
 }

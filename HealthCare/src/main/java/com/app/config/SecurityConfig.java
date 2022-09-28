@@ -1,15 +1,10 @@
 package com.app.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity // To tell spring sec frmwork : following contains customization instrs for
@@ -29,12 +24,11 @@ public class SecurityConfig {
 	public SecurityFilterChain configureAuthorization(HttpSecurity http) throws Exception{
 		System.out.println("secutiry configure authorization in security config");
 		http.csrf().disable().authorizeRequests().
-		antMatchers("/patient/signin","/patient/signout","/patient/profile/{id}",
+		antMatchers( "/signin", "/patient/profile/{id}",
 				"/patient/profile/changePassword/{id}","/patient/signup1" , "/patient/signup2",
-				"/medincharge/signin","/medincharge/profile", "/medincharge/signout" , "/medincharge/addMedicine",
+				"/medincharge/profile",  "/medincharge/addMedicine",
 				"/medincharge/updateQty/{id}" , "/medincharge/deleteMed/{id}",
-				"/labincharge/signin","/labincharge/profile","/labincharge/profile/changePassword/{id}",
-				"/labincharge/signout","/labincharge/deleteLabTest/{id}", "/labincharge/addLabTest","/patient/*","/patient/order/{id}",
+				"/patient/*","/patient/order/{id}",
 				"/patient/profile/delete/{id}" ,"/patient/payment/{id}","/patient/orderhistory/{id}",
 				 "/patient/walletRecharge/{id}","/patient/wallet/{id}","/medincharge/fetchorders","/medincharge/updateorder/{id}").permitAll().
 //		antMatchers("/products/purchase").hasRole("CUSTOMER").

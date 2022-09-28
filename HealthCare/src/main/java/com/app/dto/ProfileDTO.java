@@ -20,13 +20,13 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ProfileDTO {
-	
+
 	private String email;
 	private String name;
-	
+
 	private long phone;
-	private String address ; 
+	private String address;
 	private LocalDate dob;
 	private Gender gender;
-	
+
 }

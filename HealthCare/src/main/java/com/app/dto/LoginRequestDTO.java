@@ -18,4 +18,6 @@ public class LoginRequestDTO {
 	@NotBlank(message = "password is required")
 	private String password;
 	
+	private String user;
+	
 }

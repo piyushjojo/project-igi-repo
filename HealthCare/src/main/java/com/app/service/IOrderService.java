@@ -12,15 +12,14 @@ import com.app.dto.PaymentProcessingDto;
 import com.app.pojos.Order;
 
 public interface IOrderService {
-	Order saveOrderDetails(long id,ArrayList<OrderMedicineRequestDTO> orderList);
+	Order saveOrderDetails(long id, ArrayList<OrderMedicineRequestDTO> orderList);
 
 	OrderMedicineResponseDTO fetchOMRSD(Order order);
 
-	OrderMedicineResponseDTO paymentUpdateDetails(PaymentProcessingDto paymentDto,long id);
+	OrderMedicineResponseDTO paymentUpdateDetails(PaymentProcessingDto paymentDto, long id);
 
 	OrderHistoryResponseDTO fetchOrderlist(long id);
 
 	void updateOrderStatus(long orderId);
-	
-	
+
 }

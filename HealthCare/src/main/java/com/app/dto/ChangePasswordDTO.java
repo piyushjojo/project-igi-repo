@@ -10,9 +10,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ChangePasswordDTO {
-	
-	private String oldPassword ; 
-	@NotBlank(message = "new password can not be blank" )
-	private String newPassword ; 
-	
+
+	private String oldPassword;
+	@NotBlank(message = "new password can not be blank")
+	private String newPassword;
+
 }

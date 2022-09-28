@@ -6,28 +6,24 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
- 
+
 // Annotations
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
- 
+
 // Class
 
 public class EmailDetails {
- 
+	private String recipient;
 
-    // Class data members
+	private String msgBody;
 
-    private String recipient;
+	private String subject;
 
-    private String msgBody;
-
-    private String subject;
-
-    private String attachment;
+	private String attachment;
 
 	public EmailDetails(String recipient, String msgBody, String subject) {
 		super();
@@ -35,6 +31,5 @@ public class EmailDetails {
 		this.msgBody = msgBody;
 		this.subject = subject;
 	}
-    
-    
+
 }

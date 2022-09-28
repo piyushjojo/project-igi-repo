@@ -5,12 +5,13 @@ import com.app.dto.LoginResponseDTO;
 import com.app.dto.MedQtyUpdateDTO;
 import com.app.dto.MedicineDTO;
 import com.app.dto.ProfileDTO;
+import com.app.pojos.MedicineIncharge;
 
 public interface IMedInchargeService {
 	
 //	long getPatientId(String email);
 	
-	LoginResponseDTO login(LoginRequestDTO request);
+	MedicineIncharge login(LoginRequestDTO request);
 	ProfileDTO showProfile(long id);
 	
 	String changePassword(long id, String oldPassword, String newPassword);

@@ -11,12 +11,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class OrderMedicineResponseDTO {
-private ArrayList<MedicineOrder> medList;
-private Order order;
+	private ArrayList<MedicineOrder> medList;
+	private Order order;
 }

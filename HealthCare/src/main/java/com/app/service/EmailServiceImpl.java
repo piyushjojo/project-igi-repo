@@ -14,147 +14,129 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.app.dto.EmailDetails;
- 
-// Annotation
+
 @Service
-// Class
-// Implementing EmailService interface
-
 public class EmailServiceImpl implements EmailService {
- 
 
-    @Autowired private JavaMailSender javaMailSender;
- 
+	@Autowired
+	private JavaMailSender javaMailSender;
 
-    @Value("${spring.mail.username}") private String sender;
- 
+	@Value("${spring.mail.username}")
+	private String sender;
 
-    // Method 1
+	// Method 1
 
-    // To send a simple email
+	// To send a simple email
 
-    public String sendSimpleMail(EmailDetails details)
+	public String sendSimpleMail(EmailDetails details)
 
-    {
- 
+	{
 
-        // Try block to check for exceptions
+		// Try block to check for exceptions
 
-        try {
- 
+		try {
 
-            // Creating a simple mail message
+			// Creating a simple mail message
 
-            SimpleMailMessage mailMessage
+			SimpleMailMessage mailMessage
 
-                = new SimpleMailMessage();
- 
+					= new SimpleMailMessage();
 
-            // Setting up necessary details
+			// Setting up necessary details
 
-            mailMessage.setFrom(sender);
+			mailMessage.setFrom(sender);
 
-            mailMessage.setTo(details.getRecipient());
+			mailMessage.setTo(details.getRecipient());
 
-            mailMessage.setText(details.getMsgBody());
+			mailMessage.setText(details.getMsgBody());
 
-            mailMessage.setSubject(details.getSubject());
- 
+			mailMessage.setSubject(details.getSubject());
 
-            // Sending the mail
+			// Sending the mail
 
-            javaMailSender.send(mailMessage);
+			javaMailSender.send(mailMessage);
 
-            return "Mail Sent Successfully...";
+			return "Mail Sent Successfully...";
 
-        }
- 
+		}
 
-        // Catch block to handle the exceptions
+		// Catch block to handle the exceptions
 
-        catch (Exception e) {
+		catch (Exception e) {
 
-            return "Error while Sending Mail";
+			return "Error while Sending Mail";
 
-        }
+		}
 
-    }
- 
+	}
 
-    // Method 2
+	// Method 2
 
-    // To send an email with attachment
+	// To send an email with attachment
 
-    public String
+	public String
 
-    sendMailWithAttachment(EmailDetails details)
+			sendMailWithAttachment(EmailDetails details)
 
-    {
+	{
 
-        // Creating a mime message
+		// Creating a mime message
 
-        MimeMessage mimeMessage
+		MimeMessage mimeMessage
 
-            = javaMailSender.createMimeMessage();
+				= javaMailSender.createMimeMessage();
 
-        MimeMessageHelper mimeMessageHelper;
- 
+		MimeMessageHelper mimeMessageHelper;
 
-        try {
- 
+		try {
 
-            // Setting multipart as true for attachments to
+			// Setting multipart as true for attachments to
 
-            // be send
+			// be send
 
-            mimeMessageHelper
+			mimeMessageHelper
 
-                = new MimeMessageHelper(mimeMessage, true);
+					= new MimeMessageHelper(mimeMessage, true);
 
-            mimeMessageHelper.setFrom(sender);
+			mimeMessageHelper.setFrom(sender);
 
-            mimeMessageHelper.setTo(details.getRecipient());
+			mimeMessageHelper.setTo(details.getRecipient());
 
-            mimeMessageHelper.setText(details.getMsgBody());
+			mimeMessageHelper.setText(details.getMsgBody());
 
-            mimeMessageHelper.setSubject(
+			mimeMessageHelper.setSubject(
 
-                details.getSubject());
- 
+					details.getSubject());
 
-            // Adding the attachment
+			// Adding the attachment
 
-            FileSystemResource file
+			FileSystemResource file
 
-                = new FileSystemResource(
+					= new FileSystemResource(
 
-                    new File(details.getAttachment()));
- 
+							new File(details.getAttachment()));
 
-            mimeMessageHelper.addAttachment(
+			mimeMessageHelper.addAttachment(
 
-                file.getFilename(), file);
- 
+					file.getFilename(), file);
 
-            // Sending the mail
+			// Sending the mail
 
-            javaMailSender.send(mimeMessage);
+			javaMailSender.send(mimeMessage);
 
-            return "Mail sent Successfully";
+			return "Mail sent Successfully";
 
-        }
- 
+		}
 
-        // Catch block to handle MessagingException
+		// Catch block to handle MessagingException
 
-        catch (MessagingException e) {
- 
+		catch (MessagingException e) {
 
-            // Display message when exception occurred
+			// Display message when exception occurred
 
-            return "Error while sending mail!!!";
+			return "Error while sending mail!!!";
 
-        }
+		}
 
-    }
+	}
 }
