@@ -1,20 +1,13 @@
 package com.app.controller;
 
-import java.util.ArrayList;
-
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,19 +16,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.config.TokenManager;
+import com.app.dao.IMedicineOrderRepo;
 import com.app.dao.IOrderRepository;
 import com.app.dto.ApiResponse;
 import com.app.dto.ChangePasswordDTO;
-import com.app.dto.LoginRequestDTO;
-import com.app.dto.LoginResponseDTO;
+import com.app.dto.FetchOrderListResponseDTO;
 import com.app.dto.MedQtyUpdateDTO;
 import com.app.dto.MedicineDTO;
 import com.app.dto.ProfileDTO;
-import com.app.dto.RequestValidateToken;
-import com.app.pojos.MedicineIncharge;
+import com.app.pojos.Order;
 import com.app.service.IOrderService;
 import com.app.service.MedInchargeService;
 
@@ -52,6 +44,9 @@ public class MedInchargeController {
 	
 	@Autowired
 	private IOrderService orderService;
+	
+	@Autowired
+	private IMedicineOrderRepo medRepo;
 
 	@GetMapping("/profile/{id}")
 	public ProfileDTO patientProfile(@PathVariable long id) {
@@ -97,9 +92,12 @@ public class MedInchargeController {
 	
 	
 	@GetMapping("/fetchorders")
-	public ResponseEntity<?> fetchOrders(){
-		
-	return new ResponseEntity<>(orderRepo.fetchOrderList(), HttpStatus.OK);
+	public ResponseEntity<?> fetchOrders(@RequestParam int pageno){
+		Pageable pageable=PageRequest.of(pageno, 5);
+		System.out.println(pageable+" in pageable");
+		Page<Order> orderlist=orderRepo.fetchOrderList(pageable);
+		System.out.println(orderlist.toList()+" abc "+orderlist.getTotalPages());
+	return new ResponseEntity<>(new FetchOrderListResponseDTO(orderlist.toList(),orderlist.getTotalPages()), HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateorder/{id}")
@@ -108,5 +106,11 @@ public class MedInchargeController {
 		orderService.updateOrderStatus(id);
 		return new ResponseEntity<>(new ApiResponse("Order Dispatched"), HttpStatus.OK);
 	}
+	
+	@GetMapping("/vieworder/{id}")
+	public ResponseEntity<?> getOrderByOrderId(@PathVariable long id){
+		
+		return new ResponseEntity<>(medRepo.findAllByOrderId(id), HttpStatus.OK);
+		}
 	
 }

@@ -3,6 +3,8 @@ package com.app.dao;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,7 +30,7 @@ public interface IOrderRepository extends JpaRepository<Order, Long> {
 	ArrayList<Order> findByPatientId(long id);
 
 	@Query("select o from Order o where o.payment_status='PAID'")
-	ArrayList<Order> fetchOrderList();
+	Page<Order> fetchOrderList(Pageable pageable);
 
 	@Modifying
 	@Query("update Order o set  o.order_status='DISPATCHED' where o.id=?1")

@@ -30,7 +30,7 @@ public class SecurityConfig {
 				"/medincharge/updateQty/{id}" , "/medincharge/deleteMed/{id}",
 				"/patient/*","/patient/order/{id}",
 				"/patient/profile/delete/{id}" ,"/patient/payment/{id}","/patient/orderhistory/{id}",
-				 "/patient/walletRecharge/{id}","/patient/wallet/{id}","/medincharge/fetchorders","/medincharge/updateorder/{id}").permitAll().
+				 "/patient/walletRecharge/{id}","/patient/wallet/{id}","/medincharge/fetchorders","/medincharge/updateorder/{id}","/medincharge/vieworder/{id}").permitAll().
 //		antMatchers("/products/purchase").hasRole("CUSTOMER").
 //		antMatchers("/products/add").hasRole("ADMIN").
 		anyRequest().authenticated().

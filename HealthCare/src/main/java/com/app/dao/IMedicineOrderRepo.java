@@ -14,4 +14,6 @@ public interface IMedicineOrderRepo extends JpaRepository<MedicineOrder, Long> {
 
 	ArrayList<MedicineOrder> findByOrder(Order order);
 
+	ArrayList<MedicineOrder> findAllByOrderId(long id);
+
 }
