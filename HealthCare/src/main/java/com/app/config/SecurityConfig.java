@@ -26,17 +26,14 @@ public class SecurityConfig {
 		http.csrf().disable().authorizeRequests().
 		antMatchers( "/signin", "/patient/profile/{id}",
 				"/patient/profile/changePassword/{id}","/patient/signup1" , "/patient/signup2",
-				"/medincharge/profile",  "/medincharge/addMedicine",
+				"/medincharge/profile", "/medincharge/medicines", "/medincharge/addMedicine",
 				"/medincharge/updateQty/{id}" , "/medincharge/deleteMed/{id}",
 				"/patient/*","/patient/order/{id}",
 				"/patient/profile/delete/{id}" ,"/patient/payment/{id}","/patient/orderhistory/{id}",
 				 "/patient/walletRecharge/{id}","/patient/wallet/{id}","/medincharge/fetchorders","/medincharge/updateorder/{id}","/medincharge/vieworder/{id}").permitAll().
-//		antMatchers("/products/purchase").hasRole("CUSTOMER").
-//		antMatchers("/products/add").hasRole("ADMIN").
+
 		anyRequest().authenticated().
 		and().
-//		formLogin() //Add this only in case of web clients : i.e while developing monolithic web app
-//		.and()
 		httpBasic();		
 		return http.build();
 	}

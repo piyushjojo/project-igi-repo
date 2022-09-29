@@ -2,6 +2,7 @@ package com.app.controller;
 
 import javax.validation.Valid;
 
+import com.app.dao.MedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,6 +49,9 @@ public class MedInchargeController {
 	@Autowired
 	private IMedicineOrderRepo medRepo;
 
+	@Autowired
+	private MedicineRepository medicineRepository;
+
 	@GetMapping("/profile/{id}")
 	public ProfileDTO patientProfile(@PathVariable long id) {
 		System.out.println("in med incharge profile ");
@@ -79,10 +83,24 @@ public class MedInchargeController {
 		}
 	}
 
-	@PutMapping("/updateQty/{id}")
-	public ResponseEntity<?> updateQty(@PathVariable long id , @RequestBody MedQtyUpdateDTO medQtyDTO){
-		return new ResponseEntity<>(new ApiResponse(medInchargeService.updateQty(id , medQtyDTO)), HttpStatus.OK);
+	@PutMapping("/addMedicine")
+	public ResponseEntity<?> updateMedicine(@RequestBody @Valid MedicineDTO medicineDTO){
+		System.out.println("in add medicine");
+		try {
+			medInchargeService.addMedicine(medicineDTO);
+			return new ResponseEntity<>(new ApiResponse("medicine added successfully"), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(new ApiResponse("failed to add medicine"), HttpStatus.BAD_REQUEST);
+		}
 	}
+
+
+
+//	@PutMapping("/updateQty/{id}")
+//	public ResponseEntity<?> updateQty(@PathVariable long id , @RequestBody MedQtyUpdateDTO medQtyDTO){
+//		return new ResponseEntity<>(new ApiResponse(medInchargeService.updateQty(id , medQtyDTO)), HttpStatus.OK);
+//	}
 	
 	@DeleteMapping("/deleteMed/{id}") //update quantity
 	public ResponseEntity<?> deleteMedicine(@PathVariable long id){
@@ -111,6 +129,12 @@ public class MedInchargeController {
 	public ResponseEntity<?> getOrderByOrderId(@PathVariable long id){
 		
 		return new ResponseEntity<>(medRepo.findAllByOrderId(id), HttpStatus.OK);
+		}
+
+
+		@GetMapping("/medicines")
+		public ResponseEntity<?> getAllMedicines(){
+		return new ResponseEntity<>(medicineRepository.findAll(), HttpStatus.OK);
 		}
 	
 }

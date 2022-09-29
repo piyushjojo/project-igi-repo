@@ -63,7 +63,7 @@ public class MedInchargeService implements IMedInchargeService {
 
 		Medicine checkMed = medRepo.findByName(medicineDTO.getName());
 		if (checkMed != null) {
-			medRepo.udpateMedQty(checkMed.getId(), medicineDTO.getQuantity());
+			medRepo.udpateMedQtyPrice(checkMed.getId(), medicineDTO.getQuantity(),medicineDTO.getPrice());
 			return "medicine already exist , thus qty updated.";
 		}
 		medRepo.save(med);
@@ -76,10 +76,10 @@ public class MedInchargeService implements IMedInchargeService {
 		return "medicine deleted";
 	}
 
-	@Override
-	public String updateQty(long id, MedQtyUpdateDTO medQtyDTO) {
-		medRepo.udpateMedQty(id, medQtyDTO.getQuantity());
-		return "qty updated successfully";
-	}
+//	@Override
+//	public String updateQty(long id, MedQtyUpdateDTO medQtyDTO) {
+//		medRepo.udpateMedQty(id, medQtyDTO.getQuantity());
+//		return "qty updated successfully";
+//	}
 
 }

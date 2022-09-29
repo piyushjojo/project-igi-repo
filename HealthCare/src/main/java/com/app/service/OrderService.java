@@ -88,13 +88,12 @@ public class OrderService implements IOrderService {
 		msgBody += "\n";
 		msgBody += "\n";
 		msgBody += "-----------------------------------------\n";
-//		double walletBalance=p.getWallet()-order.getAmount();
 		msgBody += "Wallet Balance: " + p.getWallet() + "\n";
 		msgBody += "Thank You For Ordering " + "\n";
 		String subject = "Order Details";
 		EmailDetails details = new EmailDetails(p.getEmail(), msgBody, subject);
-//		String sendSimpleMail = emailService.sendSimpleMail(details);
-//		System.out.println(sendSimpleMail);
+		String sendSimpleMail = emailService.sendSimpleMail(details);
+		System.out.println(sendSimpleMail);
 		return omrsd;
 	}
 

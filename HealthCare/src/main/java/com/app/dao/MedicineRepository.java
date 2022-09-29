@@ -10,8 +10,8 @@ import com.app.pojos.Medicine;
 
 public interface MedicineRepository extends JpaRepository<Medicine, Long> {
 	@Modifying
-	@Query("update Medicine m set m.quantity = m.quantity + ?2 where m.id = ?1 ")
-	void udpateMedQty(long id, int qty);
+	@Query("update Medicine m set m.price = ?3 ,m.quantity = m.quantity + ?2 where m.id = ?1 ")
+	void udpateMedQtyPrice(long id, int qty,double price);
 
 	@Query("select m from Medicine m where m.name like %?1%")
 	ArrayList<Medicine> findByMNameLike(String name);

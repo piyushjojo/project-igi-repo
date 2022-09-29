@@ -19,7 +19,7 @@ public interface IMedInchargeService {
 	String addMedicine(MedicineDTO medicineDTO);
 	
 	String deleteMedicine(long id);
-	String updateQty(long id, MedQtyUpdateDTO medQtyDTO);
+//	String updateQty(long id, MedQtyUpdateDTO medQtyDTO);
 	
 //	String deleteUser(long id);
 	
